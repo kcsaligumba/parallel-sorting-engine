@@ -2,7 +2,7 @@ import os, time, sys, filecmp
 
 def test_serial():
     start = time.time()
-    if os.system("./merge_sort_serial"):
+    if os.system("merge_sort_serial.exe"):
         sys.exit("sequential program failure")
     end = time.time()
     return end - start
@@ -10,7 +10,7 @@ def test_serial():
 
 def test_parallel():
     start = time.time()
-    if os.system("./merge_sort_parallel"):
+    if os.system("merge_sort_parallel.exe"):
         sys.exit("parallel program failure")
     end = time.time()
     return end - start
