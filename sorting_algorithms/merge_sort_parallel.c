@@ -44,7 +44,7 @@ int main() {
     pthread_create(&thread, NULL, merge_sort_thread_wrapper, (void *)head);
     pthread_join(thread, (void **)&head);
 
-    print_list(head,"parallel_output.txt");
+    print_list(head,"merge_sort_parallel_output.txt");
     free_list(head);
     return 0;
 }

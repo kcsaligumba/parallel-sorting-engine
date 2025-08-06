@@ -1,17 +1,33 @@
 import os, time, sys, filecmp
 
-def test_serial():
+def test_merge_serial():
     start = time.time()
     if os.system("merge_sort_serial.exe"):
-        sys.exit("sequential program failure")
+        sys.exit("serial mergesort failed")
     end = time.time()
     return end - start
 
 
-def test_parallel():
+def test_merge_parallel():
     start = time.time()
     if os.system("merge_sort_parallel.exe"):
-        sys.exit("parallel program failure")
+        sys.exit("parallel mergesort failed")
+    end = time.time()
+    return end - start
+
+
+def test_quick_serial():
+    start = time.time()
+    if os.system("quick_sort_serial.exe"):
+        sys.exit("serial quicksort failed")
+    end = time.time()
+    return end - start
+
+
+def test_quick_parallel():
+    start = time.time()
+    if os.system("quick_sort_parallel.exe"):
+        sys.exit("parallel quicksort failed")
     end = time.time()
     return end - start
 

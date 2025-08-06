@@ -127,7 +127,7 @@ Node* merge_ordered_ll(Node* heada, Node* headb) {
 }
 
 /*
-    Recursively sort a linked list
+    Recursively sort a linked list using merge sort
 
     ARGS:
         Node* head -> linked list head

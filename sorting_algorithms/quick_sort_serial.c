@@ -1,4 +1,4 @@
-#include "merge_sort.h"
+#include "quick_sort.h"
 
 int main() {
     Node* head = make_ll_from_file("input.txt");
