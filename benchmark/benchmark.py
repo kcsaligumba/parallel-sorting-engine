@@ -33,12 +33,22 @@ def test_quick_parallel():
 
 
 if __name__ == '__main__':
-    serial = test_serial()
-    parallel = test_parallel()
-    if filecmp.cmp("serial_output.txt", "parallel_output.txt"):
+    merge_serial = test_merge_serial()
+    merge_parallel = test_merge_parallel()
+    if filecmp.cmp("merge_sort_serial_output.txt", "merge_sort_parallel_output.txt"):
         print("Benchmark success!")
     else:
         print("Benchmark failed, parallel and serial output do not match!")
         exit(-1)
     
-    print("Time taken for serial:\t\t{}\nTime taken for parallel:\t{}\nSpeedup:\t\t\t{} X".format(serial, parallel, round(serial/parallel, 2)))
+    print("Time taken for serial:\t\t{}\nTime taken for parallel:\t{}\nSpeedup:\t\t\t{} X".format(merge_serial, merge_parallel, round(merge_serial/merge_parallel, 2)))
+
+    quick_serial = test_quick_serial()
+    quick_parallel = test_quick_parallel()
+    if filecmp.cmp("quick_sort_serial_output.txt", "quick_sort_parallel_output.txt"):
+        print("Benchmark success!")
+    else:
+        print("Benchmark failed, parallel and serial output do not match!")
+        exit(-1)
+    
+    print("Time taken for serial:\t\t{}\nTime taken for parallel:\t{}\nSpeedup:\t\t\t{} X".format(quick_serial, quick_parallel, round(merge_serial/merge_parallel, 2)))
