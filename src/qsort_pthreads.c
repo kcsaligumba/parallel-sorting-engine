@@ -1,8 +1,8 @@
 // Parallel quicksort on arrays of record_t by key using pthreads.
 // Strategy: recursive partition; spawn new threads for left/right if above cutoff and thread budget.
 #define _GNU_SOURCE
-#include "parallel.h"
-#include "record.h"
+#include "../include/parallel.h"
+#include "../include/record.h"
 #include <pthread.h>
 #include <stdlib.h>
 #include <string.h>

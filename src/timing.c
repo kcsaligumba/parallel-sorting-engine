@@ -1,4 +1,4 @@
-#include "timing.h"
+#include "../include/timing.h"
 #include <time.h>
 
 double wall_time() {

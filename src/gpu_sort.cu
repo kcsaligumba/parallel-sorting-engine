@@ -5,7 +5,7 @@
 #include <cuda_runtime.h>
 #include <stdint.h>
 #include <stdio.h>
-#include "record.h"
+#include "../include/record.h"
 
 extern "C" void gpu_sort_records(record_t* host_arr, size_t n) {
     // copy keys and values separately to device

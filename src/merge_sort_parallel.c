@@ -1,4 +1,4 @@
-#include "merge_sort.h"
+#include "../include/merge_sort.h"
 #include <pthread.h>
 
 #define THRESHOLD 800000

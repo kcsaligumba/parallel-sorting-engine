@@ -6,10 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
-#include "record.h"
-#include "parallel.h"
-#include "gpu.h"
-#include "timing.h"
+#include "../include/record.h"
+#include "../include/parallel.h"
+#include "../include/gpu.h"
+#include "../include/timing.h"
 
 typedef enum { ALG_QSORT, ALG_RADIX, ALG_GPU } algo_t;
 

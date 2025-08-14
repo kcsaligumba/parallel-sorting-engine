@@ -1,8 +1,8 @@
 // Parallel stable LSD radix sort for 64-bit unsigned keys (treat int64 as unsigned for order by bit pattern).
 // We sort by key and carry val along.
 #define _GNU_SOURCE
-#include "parallel.h"
-#include "record.h"
+#include "../include/parallel.h"
+#include "../include/record.h"
 #include <pthread.h>
 #include <stdlib.h>
 #include <string.h>
