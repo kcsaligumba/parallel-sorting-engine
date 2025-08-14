@@ -1,7 +1,7 @@
 
 # Parallel Sorting Engine — CPU (pthreads) + CUDA
 
-This extends your parallel merge sort project to include **parallel quicksort**, **parallel 64‑bit radix sort**, and a **CUDA/Thrust GPU** sorter, targeting **large‑scale financial time series**.
+Extension of parallel merge sort project to include **parallel quicksort**, **parallel 64‑bit radix sort**, and a **CUDA/Thrust GPU** sorter, targeting **large‑scale financial time series**.
 
 ## What’s included
 
