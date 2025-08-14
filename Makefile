@@ -1,39 +1,41 @@
+# Build CPU (pthreads) + GPU (CUDA) sorting engine
 CC=gcc
-CFLAGS= -Wall -g -O0
-LDFLAGS = -lpthread
+CXX=g++
+NVCC=nvcc
 
-# Directory structure
-SRC_DIR = sorting_algorithms
-INC_DIR = include
+CFLAGS=-O3 -march=native -Wall -Wextra -pthread
+CXXFLAGS=$(CFLAGS)
+LDFLAGS=-lpthread
 
-INCLUDES = $(INC_DIR)/ll.h $(INC_DIR)/merge_sort.h $(INC_DIR)/quick_sort.h
+INCLUDES=-Iinclude
 
-all: test merge_sort_serial merge_sort_parallel quick_sort_serial quick_sort_parallel
+CPU_SRCS=src/record.c src/timing.c src/qsort_pthreads.c src/radix64_pthreads.c src/main.c
+CPU_OBJS=$(CPU_SRCS:.c=.o)
 
-# Compile object files
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES)
-	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+GPU_SRCS=src/gpu_sort.cu
+GPU_OBJS=$(GPU_SRCS:.cu=.o)
 
-$(INC_DIR)/test.o: $(INC_DIR)/test.c $(INCLUDES)
-	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+# If you don't have CUDA installed, you can still build CPU-only target: make cpu
+all: sort_driver gpu
 
-# Build executables
-test: $(INC_DIR)/test.o $(INC_DIR)/merge_sort.o $(INC_DIR)/quick_sort.o $(INC_DIR)/ll.o
-	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ $^
+cpu: sort_driver
 
-merge_sort_serial: $(SRC_DIR)/merge_sort_serial.o $(INC_DIR)/merge_sort.o $(INC_DIR)/ll.o
-	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ $^
+sort_driver: $(CPU_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-merge_sort_parallel: $(SRC_DIR)/merge_sort_parallel.o $(INC_DIR)/merge_sort.o $(INC_DIR)/ll.o
-	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ $^ $(LDFLAGS)
+gpu: $(GPU_OBJS)
+	@echo "Built GPU object. Link happens via sort_driver when GPU used dynamically."
 
-quick_sort_serial: $(SRC_DIR)/quick_sort_serial.o $(INC_DIR)/quick_sort.o $(INC_DIR)/ll.o
-	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ $^
+src/%.o: src/%.c include/%.h | include
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
-quick_sort_parallel: $(SRC_DIR)/quick_sort_parallel.o $(INC_DIR)/quick_sort.o $(INC_DIR)/ll.o
-	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ $^ $(LDFLAGS)
+src/main.o: src/main.c include/record.h include/parallel.h include/gpu.h include/timing.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
-.PHONY: clean
+src/gpu_sort.o: src/gpu_sort.cu include/record.h include/gpu.h
+	$(NVCC) -O3 -Xcompiler -fPIC $(INCLUDES) -c -o $@ $<
 
 clean:
-	rm -f $(SRC_DIR)/*.o $(INC_DIR)/*.o test merge_sort_serial merge_sort_parallel quick_sort_serial quick_sort_parallel
+	rm -f src/*.o sort_driver
+
+.PHONY: all clean cpu gpu
