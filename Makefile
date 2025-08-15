@@ -9,7 +9,7 @@ LDFLAGS=-lpthread
 
 INCLUDES=-Iinclude
 
-CPU_SRCS=src/record.c src/timing.c src/qsort_pthreads.c src/radix64_pthreads.c src/main.c
+CPU_SRCS=src/record.c src/timing.c src/qsort_pthreads.c src/radix64_pthreads.c src/main.c src/gpu_stub.c
 CPU_OBJS=$(CPU_SRCS:.c=.o)
 
 GPU_SRCS=src/gpu_sort.cu

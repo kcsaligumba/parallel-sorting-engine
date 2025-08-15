@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "record.h": "c",
+        "gpu.h": "c",
+        "timing.h": "c",
+        "string.h": "c",
+        "time.h": "c"
+    }
+}
