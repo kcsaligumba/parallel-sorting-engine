@@ -1,11 +1,9 @@
 
 # Parallel Sorting Engine (C + pthreads + CUDA)
 
-High-performance sorting for large time-series. Includes array sorts (parallel quicksort, parallel 64-bit radix, CUDA/Thrust GPU) and linked-list merge sort (serial + pthreads).
+High-performance sorting for large financial time-series. Includes array sorts (parallel quicksort, parallel 64-bit radix, CUDA/Thrust GPU) and linked-list merge sort (serial + pthreads).
 
 ## Build
-
-### CPU-only
 ```bash
 # CPU-only (qsort, radix, linked-list merge sort)
 make cpu
